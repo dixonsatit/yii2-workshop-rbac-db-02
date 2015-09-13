@@ -25,12 +25,7 @@ class ChoiceItem extends \yii\db\ActiveRecord
     const STATUS_NOT_ACTIVE = 0;
     const STATUS_ACTIVE = 1;
 
-    public function behaviors(){
-      return [
-        TimestampBehavior::className(),
-        BlameableBehavior::className()
-      ];
-    }
+
     /**
      * @inheritdoc
      */
@@ -89,7 +84,7 @@ class ChoiceItem extends \yii\db\ActiveRecord
       ];
       return array_key_exists($key, $items) ? $items[$key] : [];
     }
-    
+
     public function getItemStatus(){
       return $this->itemAilas('status');
     }
