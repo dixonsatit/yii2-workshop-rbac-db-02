@@ -40,15 +40,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'ceallphone',
             'personal_id',
             'photo',
-            [
-              'format'=>'image',
-              'attribute'=>'photo',
-              'value'=>$model->getUploadPhoto()
-            ],
+            // [
+            //   'format'=>'image',
+            //   'attribute'=>'photo',
+            //   'value'=>$model->getUploadPhoto()
+            // ],
+            // [
+            //   'format'=>'raw',
+            //   'attribute'=>'photo',
+            //   'value'=>Html::img($model->getUploadPhoto())
+            // ],
             [
               'format'=>'raw',
               'attribute'=>'photo',
-              'value'=>Html::img($model->getUploadPhoto())
+              'value'=>$model->getUploadPhotos()
             ],
             'nationality',
             'race',

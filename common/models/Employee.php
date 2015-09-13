@@ -7,6 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\AttributeBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\Html;
 /**
  * This is the model class for table "{{%employee}}".
  *
@@ -150,6 +151,16 @@ class Employee extends ActiveRecord
 
   public function getUploadPhoto(){
     return Yii::getAlias('@web').'/uploads/'.$this->photo;
+  }
+
+  public function getUploadPhotos(){
+    $items = explode(',', $this->photo);
+    $img = '';
+    foreach ($items as $key => $value) {
+      $path = Yii::getAlias('@web').'/uploads/'.$value;
+      $img.= Html::img($path);
+    }
+    return $img;
   }
 
   public function upload($photo)
