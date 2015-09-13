@@ -69,7 +69,8 @@ use common\models\Department;
 
       <div class="row">
           <div class="col-md-3">
-          <?= $form->field($model, 'photo')->fileInput() ?>
+          <?php //$form->field($model, 'photo')->fileInput() ?>
+          <?= $form->field($model, 'photo[]')->fileInput(['multiple' => true]) ?>
           </div>
           <div class="col-md-3">
             <?= $form->field($model, 'nationality')->textInput() ?>

@@ -65,8 +65,11 @@ class EmployeeController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
-            $photo  = UploadedFile::getInstance($model, 'photo');
-            $model->photo = $model->upload($photo);
+            //$photo  = UploadedFile::getInstance($model, 'photo');
+            //$model->photo = $model->upload($photo);
+
+            $photos  = UploadedFile::getInstances($model, 'photo');
+            $model->photo = $model->uploadMultiple($photos);
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

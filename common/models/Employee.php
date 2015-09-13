@@ -76,7 +76,8 @@ class Employee extends ActiveRecord
             [['blood_type'], 'string', 'max' => 10],
             [['ceallphone'], 'string', 'max' => 15],
             [['personal_id'], 'string', 'max' => 17],
-            [['photo'], 'file','skipOnEmpty' => true, 'extensions' => 'png,jpg']
+            [['photo'], 'file','skipOnEmpty' => true, 'maxFiles' => 2,
+            'extensions' => 'png,jpg']
         ];
     }
 
@@ -157,6 +158,20 @@ class Employee extends ActiveRecord
           $path = Yii::getAlias('@webroot');
           $photo->saveAs($path.'/uploads/' . $photo->baseName . '.' . $photo->extension);
           return $photo->baseName . '.' . $photo->extension;
+      } else {
+          return false;
+      }
+  }
+  public function uploadMultiple($photo)
+  {
+      if ($this->validate()) {
+        $filenames = [];
+        foreach ($photo as $file) {
+                $filename = $file->baseName . '.' . $file->extension;
+                $file->saveAs('uploads/' . $filename);
+                $filenames[] = $filename;
+            }
+        return implode(',', $filenames);
       } else {
           return false;
       }
