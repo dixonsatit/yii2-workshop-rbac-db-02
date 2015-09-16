@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\web\View;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use kartik\widgets\DatePicker;
@@ -119,3 +120,7 @@ use common\models\Department;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php
+$this->registerJsFile("@web/js/dixonHideShow.js",['depends' => [\yii\web\JqueryAsset::className()],'position'=>View::POS_END]);
+ ?>
