@@ -251,6 +251,11 @@ class User extends ActiveRecord implements IdentityInterface
     $this->roles = $roleSelect;
   }
 
+  public function getRoleByUserToString(){
+    $this->getRoleByUser();
+    return is_array($this->roles) ? implode(',', $this->roles)  : [];
+  }
+
   public function assignment(){
       $auth = Yii::$app->authManager;
       $auth->revokeAll($this->id);

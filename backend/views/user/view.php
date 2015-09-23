@@ -24,6 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+<?php
+print_r($model->getRoleByUser());
+
+?>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -37,6 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             'created_at',
             'updated_at',
+            'RoleByUserToString',
+            [
+                'label'=>'Roles',
+                'value'=>$model->getRoleByUserToString()
+            ]
         ],
     ]) ?>
 

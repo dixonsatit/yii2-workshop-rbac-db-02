@@ -3,17 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Employee;
-use backend\models\EmployeeSearch;
+use backend\models\EasyUpload;
+use backend\models\EasyUploadSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 
 /**
- * EmployeeController implements the CRUD actions for Employee model.
+ * EasyUploadController implements the CRUD actions for EasyUpload model.
  */
-class EmployeeController extends Controller
+class EasyUploadController extends Controller
 {
     public function behaviors()
     {
@@ -28,12 +28,12 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Lists all Employee models.
+     * Lists all EasyUpload models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new EmployeeSearch();
+        $searchModel = new EasyUploadSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,7 +43,7 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Displays a single Employee model.
+     * Displays a single EasyUpload model.
      * @param integer $id
      * @return mixed
      */
@@ -55,22 +55,17 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Creates a new Employee model.
+     * Creates a new EasyUpload model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Employee();
+        $model = new EasyUpload();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-
-            //$photo  = UploadedFile::getInstance($model, 'photo');
-            //$model->photo = $model->upload($photo);
-
-            $photos  = UploadedFile::getInstances($model, 'photo');
-            $model->photo = $model->uploadMultiple($photos);
-
+            $model->photo = $model->upload($model,'photo');
+            $model->photos = $model->uploadMultiple($model,'photos');
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -81,7 +76,7 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Updates an existing Employee model.
+     * Updates an existing EasyUpload model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -89,11 +84,13 @@ class EmployeeController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->skill = $model->stringToArray($model->skill);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->photo = $model->upload($model,'photo');
+            $model->photos = $model->uploadMultiple($model,'photos');
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        }  else {
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -101,7 +98,7 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Deletes an existing Employee model.
+     * Deletes an existing EasyUpload model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -114,15 +111,15 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Finds the Employee model based on its primary key value.
+     * Finds the EasyUpload model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Employee the loaded model
+     * @return EasyUpload the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Employee::findOne($id)) !== null) {
+        if (($model = EasyUpload::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
