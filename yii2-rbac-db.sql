@@ -11,7 +11,7 @@
  Target Server Version : 50625
  File Encoding         : utf-8
 
- Date: 09/16/2015 10:23:12 AM
+ Date: 09/23/2015 18:48:45 PM
 */
 
 SET NAMES utf8;
@@ -165,7 +165,7 @@ CREATE TABLE `choice_item` (
   `updated_at` int(11) DEFAULT NULL,
   `type` enum('input','checkboxlist','dropdownlist','radiolist','radio','checkbox') DEFAULT 'radiolist',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `choice_item`
@@ -193,6 +193,26 @@ CREATE TABLE `department` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `department` VALUES ('1', 'การเงิน', '1442131600', '1', '1442131600', '1'), ('2', 'ศูนย์เทคโนโลยีสารสนเทศ', '1442131620', '1', '1442131620', '1'), ('3', 'การบัญชี', '1442131643', '1', '1442131643', '1');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `easy_upload`
+-- ----------------------------
+DROP TABLE IF EXISTS `easy_upload`;
+CREATE TABLE `easy_upload` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `surname` varchar(100) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `photos` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Records of `easy_upload`
+-- ----------------------------
+BEGIN;
+INSERT INTO `easy_upload` VALUES ('1', 'sdf', 'sdf', '8c34f43e565625669d14389e99cb65cb.jpg', null), ('2', 'sdf', 'sdf', '0c51fc6c614545ca892d96b4d33a1fbb.jpg', null), ('3', 'หกด', 'หกด', '', '676b500099e8a13364d97652ee69f133.png,0c540f3d9f010cbceb7cb7e2ba73d45d.jpg'), ('4', 'sdf', 'sdf', '', ''), ('5', 's', 's', '831313b2d5290ee5e6837b73cec1d012.png', '7dd9b6bb7aab668a1547dfa37e4c7f5c.png,64137a076dfdf6be069dba372a548c5a.jpg'), ('6', 'sdf', 'sdf', '3986daf9ff7863dd8336516ada5ca0e9.jpg', '54c6cd5c40ed814c7359aaa674f252c2.jpg,b4aab0f9bf6990b8c9d0611e03c78f2b.jpg,b168dc4b16a19394ab343b9fd42ac55b.png,57f82786fe1a2845ddc55a373a0f748c.jpg');
 COMMIT;
 
 -- ----------------------------
