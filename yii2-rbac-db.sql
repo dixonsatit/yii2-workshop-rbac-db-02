@@ -11,7 +11,7 @@
  Target Server Version : 50625
  File Encoding         : utf-8
 
- Date: 09/23/2015 18:48:45 PM
+ Date: 09/29/2015 10:19:28 AM
 */
 
 SET NAMES utf8;
@@ -265,13 +265,13 @@ CREATE TABLE `m_emp` (
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `m_emp`
 -- ----------------------------
 BEGIN;
-INSERT INTO `m_emp` VALUES ('1', 'sdf', 'sdf', 'sdf', '1'), ('2', 'sdf', 'sdf', 'sdf', '2');
+INSERT INTO `m_emp` VALUES ('1', 'นาย', 'ฤธิเนตร', 'ปิดวัง', '1'), ('2', 'นาย', 'ฉัตรชัย', 'สุดโต', '2'), ('3', 'นางสาว', 'สุกัญญา', 'ยัพราษฎร์', '3'), ('4', 'นาย', 'สาธิต', 'สีถาพล', '4');
 COMMIT;
 
 -- ----------------------------
@@ -283,13 +283,13 @@ CREATE TABLE `m_user` (
   `username` varchar(150) DEFAULT NULL,
   `email` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `m_user`
 -- ----------------------------
 BEGIN;
-INSERT INTO `m_user` VALUES ('1', 'xxx', 'xxxx'), ('2', 'sdf', 'sdf');
+INSERT INTO `m_user` VALUES ('1', 'rittrinat', 'rittrinat@gmil.com'), ('2', 'ChatChai', 'ChatChai@gmail.com'), ('3', 'sukanya', 'sukanya@gmail.com'), ('4', 'sdf', 'sdf@gmail.com');
 COMMIT;
 
 -- ----------------------------
