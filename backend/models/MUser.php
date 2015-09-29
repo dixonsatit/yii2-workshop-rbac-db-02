@@ -29,7 +29,8 @@ class MUser extends \yii\db\ActiveRecord
         return [
             [['username'], 'required'],
             [['id'], 'integer'],
-            [['username', 'email'], 'string', 'max' => 150]
+            [['username', 'email'], 'string', 'max' => 150],
+            ['email','email']
         ];
     }
 

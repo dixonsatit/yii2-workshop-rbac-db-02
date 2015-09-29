@@ -67,28 +67,28 @@ class MEmpController extends Controller
      */
     public function actionCreate()
     {
-        $model = new MEmp();
+        $modelEmp = new MEmp();
         $modelUser = new MUser();
 
-        if (
-        $model->load(Yii::$app->request->post()) &&
-        $modelUser->load(Yii::$app->request->post()) &&
-        Model::validateMultiple([$model,$modelUser])
-        ) {
+        if($modelEmp->load(Yii::$app->request->post()) &&
+           $modelUser->load(Yii::$app->request->post()) &&
+           Model::validateMultiple([$modelEmp,$modelUser]))
+        {
           $transaction = $modelUser::getDb()->beginTransaction();
           try {
             if($modelUser->save()){
-              $model->user_id = $modelUser->id;
-              $model->save();
+              // $modelEmp->user_id = $modelUser->id;
+              // $modelEmp->save();
+              $modelEmp->link('user',$modelUser); // easy way saving relations
             }
              $transaction->commit();
           } catch (\Exception $e) {
              $transaction->rollBack();
           }
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $modelEmp->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $modelEmp,
                 'modelUser'=>$modelUser
             ]);
         }

@@ -1,19 +1,17 @@
 <?php
 
-namespace backend\models;
+namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\MEmp;
+use frontend\models\Emp;
 
 /**
- * MEmpSearch represents the model behind the search form about `backend\models\MEmp`.
+ * EmpSearch represents the model behind the search form about `frontend\models\Emp`.
  */
-class MEmpSearch extends MEmp
+class EmpSearch extends Emp
 {
-    public $fullname;
-    public $username;
     /**
      * @inheritdoc
      */
@@ -21,7 +19,7 @@ class MEmpSearch extends MEmp
     {
         return [
             [['id', 'user_id'], 'integer'],
-            [['title', 'name', 'surname','fullname','username'], 'safe'],
+            [['title', 'name', 'surname'], 'safe'],
         ];
     }
 
@@ -43,20 +41,11 @@ class MEmpSearch extends MEmp
      */
     public function search($params)
     {
-        $query = MEmp::find()->joinWith('user');
+        $query = Emp::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
-        $dataProvider->sort->attributes['fullname']=[
-          'asc'=>['name'=>SORT_ASC,'surname'=>SORT_DESC],
-          'desc'=>['name'=>SORT_DESC,'surname'=>SORT_DESC],
-        ];
-        $dataProvider->sort->attributes['username']=[
-          'asc'=>['m_user.username'=>SORT_ASC],
-          'desc'=>['m_user.username'=>SORT_DESC],
-        ];
 
         $this->load($params);
 
@@ -66,18 +55,14 @@ class MEmpSearch extends MEmp
             return $dataProvider;
         }
 
-        $query->andWhere('name like "%'.$this->fullname.'%" or surname like "%'.$this->fullname.'%" ');
-
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'm_user.username' => $this->username,
         ]);
 
-
-        // $query->andFilterWhere(['like', 'title', $this->title])
-        //     ->andFilterWhere(['like', 'name', $this->name])
-        //     ->andFilterWhere(['like', 'surname', $this->surname]);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'surname', $this->surname]);
 
         return $dataProvider;
     }

@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use backend\models\MUser;
 
 /**
  * This is the model class for table "m_emp".
@@ -29,7 +30,7 @@ class MEmp extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required'],
+            [['title','name','surname'], 'required'],
             [['user_id'], 'integer'],
             [['title'], 'string', 'max' => 100],
             [['name', 'surname'], 'string', 'max' => 150]
@@ -47,6 +48,8 @@ class MEmp extends \yii\db\ActiveRecord
             'name' => 'Name',
             'surname' => 'Surname',
             'user_id' => 'User ID',
+            'username' => 'รหัสผู้ใช้งาน',
+            'fullname' => 'ชื่อ-นามสกุล',
         ];
     }
 
@@ -57,5 +60,17 @@ class MEmp extends \yii\db\ActiveRecord
     public static function find()
     {
         return new MEmpQuery(get_called_class());
+    }
+
+    public function getUser(){
+      return $this->hasOne(MUser::className(),['id'=>'user_id']);
+    }
+
+    public function getFullname(){
+      return $this->title.$this->name.' '.$this->surname;
+    }
+
+    public function getUsername(){
+      return $this->user->username;
     }
 }

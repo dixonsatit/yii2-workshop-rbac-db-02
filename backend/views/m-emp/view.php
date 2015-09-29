@@ -6,10 +6,11 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\MEmp */
 
-$this->title = $model->title;
+$this->title = 'View #'.$model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Memps', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="memp-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -24,18 +25,23 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3>Employee</h3>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
             'title',
             'name',
-            'surname',
-            'user_id',
+            'surname'
         ],
     ]) ?>
-
+  </div>
+  </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3>User</h3>
     <?= DetailView::widget([
         'model' => $modelUser,
         'attributes' => [
@@ -43,5 +49,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'email',
         ],
     ]) ?>
-
+  </div>
+  </div>
 </div>

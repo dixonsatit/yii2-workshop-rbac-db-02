@@ -133,4 +133,6 @@ class EasyUpload extends \yii\db\ActiveRecord
     {
       return $this->getOldAttribute('photos') ? @explode(',',$this->getOldAttribute('photos')) : [];
     }
+
+
 }

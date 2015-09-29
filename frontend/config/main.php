@@ -37,7 +37,9 @@ return [
            'site/login',
            'site/error',
            'site/index',
-           'debug/*','gii/*'
+           'emp/*',
+           'debug/*',
+           'gii/*'
         ]
     ],
     //'as GlobalAccess'=>require(__DIR__ . '/../../common/rbac/rule-config.php'),
